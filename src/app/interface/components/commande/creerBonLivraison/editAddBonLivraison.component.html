@@ -1,0 +1,53 @@
+<p>Créer un Bon de commande</p>
+<div class="grid">
+	<div class="col-12">
+		<div class="card">
+			<h5>Détails du bon de commande et du destinataire</h5>
+			<p-toast key="tst" [baseZIndex]="99999"></p-toast>
+			<form [formGroup]="commandeForm">
+				<div class="p-fluid p-formgrid grid">
+					<div class="field col-12 md:col-6"> <label htmlFor="firstname2">Nom</label> 
+						<input pInputText
+							id="nom" type="text" formControlName="nom" /> 
+					</div>
+					<div class="field col-12 md:col-6"> <label htmlFor="firstname2">Prénom</label> <input pInputText
+							id="prénom" type="text" formControlName="prenom"  /> </div>
+					<div class="field col-12 md:col-6"> <label htmlFor="lastname2">Télèphone</label> <input pInputText
+							id="télèphone" type="text" formControlName="telephone" /> </div>
+					<div class="field col-12 md:col-6"> <label htmlFor="city">Gouvernorat</label>
+						<p-dropdown [options]="dropdownItems" optionLabel="name" formControlName="gouvernorat">
+						</p-dropdown>
+					</div>
+					<div class="field col-12 md:col-12"> <label htmlFor="lastname2">Adresse</label> <input pInputText
+							id="adresse" type="text" formControlName="adresse" /> <small>Préciser la délégation.</small> </div>
+					<div class="field col-12 md:col-6"> <label htmlFor="lastname2">Désignation de l'article</label>
+						<input pInputText id="descart"  formControlName="designation" type="text" />
+					</div>
+					<div class="field col-12 md:col-6"> <label htmlFor="zip">Nombre de pièces</label> <input pInputText
+							id="nbrpiéce" type="text"  formControlName="quantite" /> </div>
+					<div class="field col-2 md:col-2"> <label htmlFor="zip">Montant HT</label> <input pInputText
+							id="montantht" type="number" formControlName="montantHt" /> </div>
+					<div class="field col-2 md:col-2"> <label htmlFor="zip">TVA</label> <input pInputText id="tva"
+							type="text"  formControlName="tva" /> </div>
+					<div class="field col-2 md:col-2"> <label htmlFor="zip">Montant TTC</label> <input pInputText
+							id="montantttc" type="text"  formControlName="montantTtc" /> </div>
+					<div class="field col-2 md:col-2"> <label htmlFor="zip">Frais Livraison</label> <input pInputText
+							id="livraison" type="text"  formControlName="livraison"/> </div>
+					<div class="field col-2 md:col-2"> <label htmlFor="zip">Poids</label> <input pInputText
+							id="livraison" type="text"  formControlName="poids" /> </div>
+				</div>
+			
+			<div class="p-fluid p-formgrid grid">
+				<div class="field col-12 md:col-6 md:col-offset-6"> <label for="zip">Total à payer</label> <input
+						pInputText id="ttpayer"  formControlName="total" type="text" /> </div>
+			</div>
+		  </form>
+			<div class="field col-12">
+				<!-- Bouton caché en consultation -->
+				<div class="mt-3" *ngIf="!isViewMode()">
+					<p-button label="Enregistrer" (onClick)="save()"></p-button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

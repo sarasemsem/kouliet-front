@@ -12,8 +12,9 @@ import { BondeLivraisonService } from 'src/app/interface/services/bon-livraison.
 export class EditAddBonLivraisonComponent implements OnInit {
 
   mode: 'add' | 'edit' | 'view' = 'add'; 
-  commandeForm!: FormGroup;
-
+  isView = false;
+  bonLivraisonForm!: FormGroup;
+  id: string | null = null;
   dropdownItems = [
     { name: 'Ariana', code: 'Ariana'},
     { name: 'Béja', code: 'Béja'},
@@ -23,31 +24,29 @@ export class EditAddBonLivraisonComponent implements OnInit {
 
   constructor(private service: MessageService,
     private fb: FormBuilder,
-    private commandeService: BondeLivraisonService,
+    private bonDeLivraisonService: BondeLivraisonService,
     private route: ActivatedRoute,
     private router: Router) {}
 
   ngOnInit(): void {
     this.initForm();
-  
-    this.commandeForm.valueChanges.subscribe(() => {
+    this.bonLivraisonForm.valueChanges.subscribe(() => {
       this.calculerMontants();
     });
-  
-    const id = this.route.snapshot.paramMap.get('id');
-  
-    if (id) {
+    this.id = this.route.snapshot.paramMap.get('commandeId');
+    if (this.id) {
+      console.log('ID trouvé dans l\'URL :', this.id);
       this.mode = 'edit';
-      this.loadCommandeFromApi(+id);
+      this.loadCommandeFromApi(this.id);
     }
   
     if (this.mode === 'view') {
-      this.commandeForm.disable();
+      this.bonLivraisonForm.disable();
     }
   }  
 
   initForm() {
-    this.commandeForm = this.fb.group({
+    this.bonLivraisonForm = this.fb.group({
       nom: ['', Validators.required],
       prenom: ['', Validators.required],
       telephone: [''],
@@ -62,11 +61,12 @@ export class EditAddBonLivraisonComponent implements OnInit {
       poids: [''],
       total: [{ value: 0, disabled: true }]
     });
+    this.bonLivraisonForm.disable();
   }
-  loadCommandeFromApi(id: number) {
-    this.commandeService.getById(id).subscribe({
+  loadCommandeFromApi(id: string) {
+    this.bonDeLivraisonService.getById(id).subscribe({
       next: (data) => {
-        this.commandeForm.patchValue({
+        this.bonLivraisonForm.patchValue({
           nom: data.nom,
           prenom: data.prenom,
           telephone: data.telephone,
@@ -88,34 +88,16 @@ export class EditAddBonLivraisonComponent implements OnInit {
     });
   }
   
-  loadCommande() {
-    // Simulation data (API)
-    const data = {
-      nom: 'Ben Ali',
-      prenom: 'Ahmed',
-      telephone: '22123456',
-      gouvernorat: this.dropdownItems[3],
-      adresse: 'Tunis centre',
-      designation: 'Article test',
-      quantite: 2,
-      montantHt: 100,
-      tva: 19,
-      livraison: 10,
-      poids: '2kg'
-    };
-
-    this.commandeForm.patchValue(data);
-  }
 calculerMontants() {
-  const montantHt = this.commandeForm.get('montantHt')?.value || 0;
-  const tva = this.commandeForm.get('tva')?.value || 0;
-  const quantite = this.commandeForm.get('quantite')?.value || 1;
-  const livraison = this.commandeForm.get('livraison')?.value || 0;
+  const montantHt :number= this.bonLivraisonForm.get('montantHt')?.value || 0;
+  const tva :number = this.bonLivraisonForm.get('tva')?.value || 0;
+  const quantite :number  = this.bonLivraisonForm.get('quantite')?.value || 1;
+  const livraison:number = this.bonLivraisonForm.get('livraison')?.value || 0;
 
   const montantTtc = montantHt + (montantHt * tva / 100);
   const total = (montantTtc * quantite) + livraison;
 
-  this.commandeForm.patchValue(
+  this.bonLivraisonForm.patchValue(
     {
       montantTtc,
       total
@@ -125,10 +107,8 @@ calculerMontants() {
 }
 
 save() {
-  if (this.commandeForm.invalid) return;
-
-  const raw = this.commandeForm.getRawValue();
-
+  if (this.bonLivraisonForm.invalid) return;
+  const raw = this.bonLivraisonForm.getRawValue();
   const payload = {
     nom: raw.nom,
     prenom: raw.prenom,
@@ -146,9 +126,7 @@ save() {
   };
 
   if (this.mode === 'edit') {
-    const id = this.route.snapshot.paramMap.get('id');
-
-    this.commandeService.update(+id!, payload).subscribe({
+    this.bonDeLivraisonService.update(this.id!, payload).subscribe({
       next: () => {
         console.log('Commande modifiée');
         this.router.navigate(['/bon-livraison']);
@@ -156,10 +134,10 @@ save() {
     });
 
   } else {
-    this.commandeService.createCommande(payload).subscribe({
+    this.bonDeLivraisonService.createCommande(payload).subscribe({
       next: () => {
         console.log('Commande créée');
-        this.commandeForm.reset();  
+        this.bonLivraisonForm.reset();  
         this.service.add({ key: 'tst', severity: 'warn', summary: 'Warn Message', detail: 'There are unsaved changes' });
 
         //this.router.navigate(['/bon-livraison']);
@@ -174,5 +152,9 @@ save() {
 
   isViewMode(): boolean {
     return this.mode === 'view';
+  }
+  isEditMode() {
+    this.bonLivraisonForm.enable();
+    this.isView = false;
   }
 }

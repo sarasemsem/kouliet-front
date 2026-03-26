@@ -1,10 +1,10 @@
 <div class="grid">
 	<div class="col-12">
 	  <div class="card">
-		<h5>Liste des Bons de Commande</h5>
+		<h5>Liste des Bon De Livraison</h5>
 		<p-table
 		  #dt
-		  [value]="bonCommandes"
+		  [value]="listeBonLivraisons"
 		  dataKey="id"
 		  [rows]="10"
 		  [loading]="loading"
@@ -74,7 +74,7 @@
 				  pButton
 				  icon="pi pi-pencil"
 				  class="p-button-rounded p-button-text"
-				  (click)="editCommande(cmd.id)">
+				  (click)="editBonDeLivraison(cmd.id)">
 				</button>
 			  </td>
 			</tr>

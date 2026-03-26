@@ -19,15 +19,15 @@ export class BondeLivraisonService {
   createCommande(commande: BonDeLivraison): Observable<any> {
     return this.http.post(this.apiUrl, commande, { headers: this.headers });
   }
-  getAll() {
+  getAll(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl, { headers: this.headers });
   }
 
-  getById(id: number) {
+  getById(id: string): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/${id}`, { headers: this.headers });
   }
 
-  update(id: number, data: any) {
+  update(id: string, data: any): Observable<any> {
     return this.http.put(`${this.apiUrl}/${id}`, data, { headers: this.headers });
   }
 

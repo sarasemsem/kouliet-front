@@ -12,12 +12,13 @@ import { IconService } from './interface/services/icon.service';
 import { NodeService } from './interface/services/node.service';
 import { PhotoService } from './interface/services/photo.service';
 
-//New TODO mydasboard
 import { MydashboardComponent } from './interface/components/mydashboard/mydashboard.component';
 import { CommonModule } from '@angular/common';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
+import { ToolbarModule } from 'primeng/toolbar';
+
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { RippleModule } from 'primeng/ripple';
 import { MultiSelectModule } from 'primeng/multiselect';
@@ -27,14 +28,16 @@ import { ToastModule } from 'primeng/toast';
 import { SliderModule } from 'primeng/slider';
 import { RatingModule } from 'primeng/rating';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CommandeComponent } from './interface/components/commande/commande.component';
-import { EditAddBonLivraisonComponent } from './interface/components/commande/creerBonLivraison/editAddBonLivraison.component';
 import { AuthService } from './interface/services/auth.service';
 import { MessageService } from 'primeng/api';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './interface/components/auth/auth.interceptor';
+import { BonDeLivraisonComponent } from './interface/components/bonDeLivraison/listeBonLivraison.component';
+import { EditAddBonLivraisonComponent } from './interface/components/bonDeLivraison/creerModifierBonLivraison/editAddBonLivraison.component';
 
 @NgModule({
     declarations: [
-        AppComponent, NotfoundComponent, MydashboardComponent, CommandeComponent,
+        AppComponent, NotfoundComponent, MydashboardComponent, BonDeLivraisonComponent,
         EditAddBonLivraisonComponent
     ],
     imports: [
@@ -44,6 +47,7 @@ import { MessageService } from 'primeng/api';
         CommonModule,
         RatingModule,
         ButtonModule,
+        ToolbarModule,
         SliderModule,
         InputTextModule,
         ToggleButtonModule,
@@ -58,7 +62,10 @@ import { MessageService } from 'primeng/api';
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },
         CountryService, CustomerService, EventService, IconService, NodeService,
-        PhotoService, ProductService,AuthService,MessageService
+        PhotoService, ProductService,AuthService,MessageService,
+         {provide: HTTP_INTERCEPTORS,
+            useClass: AuthInterceptor,
+            multi: true}
     ],
     bootstrap: [AppComponent]
 })

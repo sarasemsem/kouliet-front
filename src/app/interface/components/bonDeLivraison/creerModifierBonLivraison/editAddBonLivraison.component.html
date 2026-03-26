@@ -1,10 +1,15 @@
-<p>Créer un Bon de commande</p>
 <div class="grid">
 	<div class="col-12">
+			<div class="flex align-items-center justify-content-between mb-3">
+				<h5 class="m-0">Détails du bon de commande et du destinataire</h5>
+				<div>
+					<p-button label="Modifier" icon="pi pi-pencil" (onClick)="isEditMode()" class="p-button-secondary" ></p-button>
+				</div>
+			</div>
 		<div class="card">
-			<h5>Détails du bon de commande et du destinataire</h5>
 			<p-toast key="tst" [baseZIndex]="99999"></p-toast>
-			<form [formGroup]="commandeForm">
+			
+			<form [formGroup]="bonLivraisonForm">
 				<div class="p-fluid p-formgrid grid">
 					<div class="field col-12 md:col-6"> <label htmlFor="firstname2">Nom</label> 
 						<input pInputText

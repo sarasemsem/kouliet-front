@@ -6,7 +6,6 @@ import { Customer, Representative } from 'src/app/interface/api/customer';
 import { Product } from 'src/app/interface/api/product';
 import { CustomerService } from 'src/app/interface/services/customer.service';
 import { ProductService } from 'src/app/interface/services/product.service';
-import { NgModule } from '@angular/core';
 
 
 interface expandedRows {

@@ -1,0 +1,26 @@
+<p>add-expediteur works!</p>
+<form [formGroup]="expediteurForm" (ngSubmit)="onSubmit()">
+
+  <div class="p-field">
+    <label>Nom</label>
+    <input type="text" pInputText formControlName="nom">
+  </div>
+
+  <div class="p-field">
+    <label>Email</label>
+    <input type="email" pInputText formControlName="email">
+  </div>
+
+  <div class="p-field">
+    <label>Téléphone</label>
+    <input type="text" pInputText formControlName="telephone">
+  </div>
+
+  <div class="p-field">
+    <label>Adresse</label>
+    <textarea pInputTextarea formControlName="adresse"></textarea>
+  </div>
+
+  <button pButton type="submit" label="Ajouter" icon="pi pi-check"></button>
+
+</form>

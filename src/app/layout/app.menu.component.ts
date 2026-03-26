@@ -21,7 +21,7 @@ export class AppMenuComponent implements OnInit {
                 ]
             },
             {
-                label: 'UI Components',
+                label: 'Gestion des bons de commandes',
                 items: [
                     { label: 'Bon de livraison', icon: 'pi pi-fw pi-id-card', routerLink: ['/commande'] },
             
@@ -30,7 +30,18 @@ export class AppMenuComponent implements OnInit {
             {
                 label: 'Gestion Utilisateurs',
                 items: [
-                    { label: 'Gestion Utilisateurs', icon: 'pi pi-fw pi-id-card', routerLink: ['/commande'] },
+                    { label: 'Ajouter un expediteur', icon: 'pi pi-fw pi-id-card', 
+                        items: [
+                            { label: 'Ajouter', icon: 'pi pi-plus', routerLink: ['/expediteurs/add'] },
+                            { label: 'Consulter', icon: 'pi pi-search', routerLink: ['/expediteurs/list'] },
+                            { label: 'Modifier', icon: 'pi pi-pencil', routerLink: ['/expediteurs/edit'] },
+                            { label: 'Désactiver', icon: 'pi pi-ban', routerLink: ['/expediteurs/deactivate'] }
+                        ]
+                    },
+                    
+                    { label: 'Ajouter un manager', icon: 'pi pi-fw pi-id-card', routerLink: ['/commande'] },
+                    { label: 'Ajouter un Livreur', icon: 'pi pi-fw pi-id-card', routerLink: ['/commande'] },
+                    { label: 'Ajouter un prestataire', icon: 'pi pi-fw pi-id-card', routerLink: ['/commande'] },
             
                 ]
             }

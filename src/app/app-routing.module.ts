@@ -5,6 +5,7 @@ import { AppLayoutComponent } from "./layout/app.layout.component";
 import { MydashboardComponent } from './interface/components/mydashboard/mydashboard.component';
 import { CommandeComponent } from './interface/components/commande/commande.component';
 import { EditAddBonLivraisonComponent } from './interface/components/commande/creerBonLivraison/editAddBonLivraison.component';
+import { AddExpediteurComponent } from './interface/components/expediteurs/add-expediteur/add-expediteur.component';
 
 @NgModule({
     imports: [
@@ -15,11 +16,9 @@ import { EditAddBonLivraisonComponent } from './interface/components/commande/cr
                     { path: '', loadChildren: () => import('./interface/components/dashboard/dashboard.module').then(m => m.DashboardModule) },
                     { path: 'commande', component: CommandeComponent},
                     { path: 'bon-livraison/modifier/:commandeId', component:  EditAddBonLivraisonComponent},
-                    {
-                        path: 'bon-livraison/creer',
-                        component: EditAddBonLivraisonComponent
-                      },
-                     { path: 'mydashboard', component: MydashboardComponent },
+                    { path: 'bon-livraison/creer', component: EditAddBonLivraisonComponent},
+                    { path: 'mydashboard', component: MydashboardComponent },
+                    { path: 'expediteurs/add', component: AddExpediteurComponent },
                 ],
             },
             { path: 'auth', loadChildren: () => import('./interface/components/auth/auth.module').then(m => m.AuthModule) },

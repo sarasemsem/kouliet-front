@@ -160,9 +160,9 @@ save() {
       next: () => {
         console.log('Commande créée');
         this.commandeForm.reset();  
-        this.service.add({ key: 'tst', severity: 'warn', summary: 'Warn Message', detail: 'There are unsaved changes' });
+        //this.service.add({ key: 'tst', severity: 'warn', summary: 'Warn Message', detail: 'There are unsaved changes' });
 
-        //this.router.navigate(['/bon-livraison']);
+        this.router.navigate(['/bon-livraison']);
       }, 
       error: err => {
         this.service.add({ key: 'tst', severity: 'warn', summary: 'Warn Message', detail: 'There are unsaved changes' });

@@ -31,11 +31,13 @@ import { CommandeComponent } from './interface/components/commande/commande.comp
 import { EditAddBonLivraisonComponent } from './interface/components/commande/creerBonLivraison/editAddBonLivraison.component';
 import { AuthService } from './interface/services/auth.service';
 import { MessageService } from 'primeng/api';
+import { AddExpediteurComponent } from './interface/components/expediteurs/add-expediteur/add-expediteur.component';
 
 @NgModule({
     declarations: [
         AppComponent, NotfoundComponent, MydashboardComponent, CommandeComponent,
-        EditAddBonLivraisonComponent
+        EditAddBonLivraisonComponent,
+        AddExpediteurComponent
     ],
     imports: [
         AppRoutingModule,

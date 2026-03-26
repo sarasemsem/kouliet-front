@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Commande } from '../../models/bonCommande';
 import { BondeLivraisonService } from '../../services/bon-livraison.service';
+import { BonDeLivraison } from '../../models/bonDeLivraison';
 
 @Component({
   selector: 'app-commande',
@@ -11,7 +11,7 @@ import { BondeLivraisonService } from '../../services/bon-livraison.service';
 })
 export class CommandeComponent implements OnInit {
 
-  bonCommandes: Commande[] = [];
+  bonCommandes: BonDeLivraison[] = [];
   loading = false;
   
   constructor(

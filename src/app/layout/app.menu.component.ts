@@ -15,7 +15,7 @@ export class AppMenuComponent implements OnInit {
     ngOnInit() {
         this.model = [
             {
-                label: 'Home',
+                label: 'Accueil',
                 items: [
                     { label: 'Dashboard', icon: 'pi pi-fw pi-home', routerLink: ['/'] }
                 ]
@@ -23,7 +23,7 @@ export class AppMenuComponent implements OnInit {
             {
                 label: 'Gestion des bons de commandes',
                 items: [
-                    { label: 'Bon de livraison', icon: 'pi pi-fw pi-id-card', routerLink: ['/commande'] },
+                    { label: 'Bon de livraison', icon: 'pi pi-fw pi-id-card', routerLink: ['/listeBonLivraison'] },
             
                 ]
             },
@@ -42,6 +42,7 @@ export class AppMenuComponent implements OnInit {
                     { label: 'Ajouter un manager', icon: 'pi pi-fw pi-id-card', routerLink: ['/commande'] },
                     { label: 'Ajouter un Livreur', icon: 'pi pi-fw pi-id-card', routerLink: ['/commande'] },
                     { label: 'Ajouter un prestataire', icon: 'pi pi-fw pi-id-card', routerLink: ['/commande'] },
+                    { label: 'Gestion Utilisateurs', icon: 'pi pi-fw pi-id-card', routerLink: ['/utilisateurs'] },
             
                 ]
             }

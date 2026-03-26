@@ -3,31 +3,31 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BondeLivraisonService } from '../../services/bon-livraison.service';
 import { BonDeLivraison } from '../../models/bonDeLivraison';
-
+ 
 @Component({
   selector: 'app-commande',
-  templateUrl: './commande.component.html',
-  styleUrls: ['./commande.component.scss']
+  templateUrl: './listeBonLivraison.component.html',
+  styleUrls: ['./listeBonLivraison.component.scss']
 })
-export class CommandeComponent implements OnInit {
+export class BonDeLivraisonComponent implements OnInit {
 
-  bonCommandes: BonDeLivraison[] = [];
+  listeBonLivraisons: BonDeLivraison[] = [];
   loading = false;
   
   constructor(
-    private commandeService: BondeLivraisonService,
+    private bonDeLivraisonService: BondeLivraisonService,
     private router: Router
   ) {}
   
   ngOnInit() {
-    this.loadCommandes();
+    this.loadBonDeLivraisons();
   }
   
-  loadCommandes() {
+  loadBonDeLivraisons() {
     this.loading = true;
-    this.commandeService.getAll().subscribe({
+    this.bonDeLivraisonService.getAll().subscribe({
       next: res => {
-        this.bonCommandes = res;
+        this.listeBonLivraisons = res;
         this.loading = false;
       },
       error: () => this.loading = false
@@ -35,10 +35,10 @@ export class CommandeComponent implements OnInit {
   }
   
   creer() {
-    this.router.navigate(['bon-livraison/creer']);
+    this.router.navigate(['bon-livraison']);
   }
-  editCommande(id: number) {
-    this.router.navigate(['bon-livraison/modifier', id]);
+  editBonDeLivraison(id: number) {
+    this.router.navigate(['bon-livraison', id]);
   }
   
   clear(table: any) {
